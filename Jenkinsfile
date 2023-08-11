@@ -1,6 +1,7 @@
 pipeline {
     agent none
     stages {
+        
         stage('Build') {
             agent {
                 docker {
@@ -12,6 +13,7 @@ pipeline {
                 stash(name: 'compiled-results', includes: 'sources/*.py*')
             }
         }
+        
         stage('Test') {
             agent {
                 docker {
@@ -27,9 +29,10 @@ pipeline {
                 }
             }
         }
+        
         stage('Manual Approval') {
             steps {
-                input message: 'Apakah Lanjut ke tahap Deploy?'
+                input message: 'Apakah Lanjut ke tahap Deploy ?'
             }
 
         }
